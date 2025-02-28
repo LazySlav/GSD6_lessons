@@ -75,9 +75,15 @@
                 attribution: 'Данные дорожной обстановки Yandex',
             })
                 .on('load', trafficControl)
+            ooptWMSLayer = L.tileLayer.wms('http://trolleway.nextgis.com/api/resource/988/wms', {
+                layers: 'oopt_russia_2011',      //'layer1,layer2,layer3'
+                format: 'image/png',
+                transparent: true,
+                attribution: '',
+            })
         var myMap = L.map('map', {
-            center: [55, 37],
-            zoom: 14,
+            center: [55.7674, 37.6593],
+            zoom: 18,
             layers: [yandexMap],
         });
 
@@ -91,9 +97,38 @@
             overlayLayers = {
                 'Яндекс_пробки': yandexTraffic,
                 'Яндекс пробки с элементом управления':yandexTrafficControl,
+                'Объекты ООПТ': ooptWMSLayer,
             };
         // layer switching
         L.control.layers(baseLayers, overlayLayers).addTo(myMap);
+
+        var myParkIcon = L.icon({
+            iconUrl:'./data/icons/park.png',
+            iconSize:[32,32],
+            IconAnchor: [16,32],
+            popupAnchor: [0,0],
+        });
+
+        L.marker([55.7674363, 37.6593733], {
+            title: 'Ихихих, я лошадка',
+            icon:myParkIcon,
+        })
+        .bindPopup('<b>Название:</b><i> Сад имени Баумана</i><br><b>Год открытия: 1920</b><br><img src="https://yandex.ru/favicon.ico" width=280px>')
+        .addTo(myMap)
+
+        L.marker([55.7581344, 37.6739216], {
+            title: 'Парк имени 1го Мая',
+            icon:myParkIcon,
+        })
+        .bindPopup('<b>Название:</b><i> Парк имени 1го Мая</i><br><b>Год открытия: 1920</b><br><img src="https://yandex.ru/favicon.ico" width=280px>')
+        .addTo(myMap)
+        
+        L.marker([55.7529845, 37.674855], {
+            title: 'Парк усадьбы Строгановых',
+            icon:myParkIcon,
+        })
+        .bindPopup('<b>Название:</b><i> Парк усадьбы Строгановых</i><br><b>Год открытия: 1920</b><br><img src="https://yandex.ru/favicon.ico" width=280px>')
+        .addTo(myMap)
     </script>
 </body>
 
