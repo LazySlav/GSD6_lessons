@@ -138,8 +138,27 @@
             [55.7636246, 37.6609558],
             [55.7635341, 37.6605883],
         ],{
-            fillColor: 'yellow'
+            fillColor: 'orange',
+            fillOpacity: 0.9,
+            color: 'brown',
+            stroke: true,
+            weight: 2,
+            dashArray: '5 5',
         })
+        .bindPopup('Общежитие МИИГАиК')
+        .addTo(myMap)
+
+        L.polyline([
+            [55.7648485, 37.6615083],
+            [55.7645285, 37.6617658],
+            [55.7637967, 37.6616961],
+            [55.7636548, 37.661806],
+        ],{
+            color: 'gray',
+            weight: 4,
+        })
+        .bindPopup('Подъезд с Гороховского')
+        .addTo(myMap)
 
         var baseLayers = {
             'OSM карта': osmLayer,
