@@ -87,20 +87,6 @@
             layers: [yandexMap],
         });
 
-        var baseLayers = {
-            'OSM карта': osmLayer,
-            'Туристическая карта OSM': osmOutdoor,
-            'Гугол спутнык': googleSat,
-            'Тындекс': yandexSat1,
-            'Тындекс 2.0': yandexMap,
-        },
-            overlayLayers = {
-                'Яндекс_пробки': yandexTraffic,
-                'Яндекс пробки с элементом управления':yandexTrafficControl,
-                'Объекты ООПТ': ooptWMSLayer,
-            };
-        // layer switching
-        L.control.layers(baseLayers, overlayLayers).addTo(myMap);
 
         var myParkIcon = L.icon({
             iconUrl:'./data/icons/park.png',
@@ -109,26 +95,68 @@
             popupAnchor: [0,0],
         });
 
-        L.marker([55.7674363, 37.6593733], {
-            title: 'Ихихих, я лошадка',
-            icon:myParkIcon,
+        var parkIconClass = L.Icon.extend({
+            options:{
+                iconSize:[32,32],
+                IconAnchor: [16,32],
+                popupAnchor: [0,0],
+            }
         })
-        .bindPopup('<b>Название:</b><i> Сад имени Баумана</i><br><b>Год открытия: 1920</b><br><img src="https://yandex.ru/favicon.ico" width=280px>')
-        .addTo(myMap)
-
-        L.marker([55.7581344, 37.6739216], {
-            title: 'Парк имени 1го Мая',
-            icon:myParkIcon,
-        })
-        .bindPopup('<b>Название:</b><i> Парк имени 1го Мая</i><br><b>Год открытия: 1920</b><br><img src="https://yandex.ru/favicon.ico" width=280px>')
-        .addTo(myMap)
         
-        L.marker([55.7529845, 37.674855], {
-            title: 'Парк усадьбы Строгановых',
-            icon:myParkIcon,
+        var parkIconArray = [
+            new parkIconClass({iconUrl:'./data/icons/park_1.png'}),
+            new parkIconClass({iconUrl:'./data/icons/park_2.png'}),
+            new parkIconClass({iconUrl:'./data/icons/park_3.png'}),
+            new parkIconClass({iconUrl:'./data/icons/park_4.png'}),
+            new parkIconClass({iconUrl:'./data/icons/park_5.png'}),
+        ]
+
+        var parksLayer = L.layerGroup([
+
+            L.marker([55.7674363, 37.6593733], {
+                title: 'Сад имени Баумана',
+                icon:parkIconArray[0],
+            })
+            .bindPopup('<b>Название:</b><i> Сад имени Баумана</i><br><b>Год открытия: 1920</b><br><img src="https://yandex.ru/favicon.ico" width=280px>'),
+
+            L.marker([55.7581344, 37.6739216], {
+                title: 'Парк имени 1го Мая',
+                icon:parkIconArray[1],
+            })
+            .bindPopup('<b>Название:</b><i> Парк имени 1го Мая</i><br><b>Год открытия: 1920</b><br><img src="https://yandex.ru/favicon.ico" width=280px>'),
+            
+            L.marker([55.7529845, 37.674855], {
+                title: 'Парк усадьбы Строгановых',
+                icon:parkIconArray[2],
+            })
+            .bindPopup('<b>Название:</b><i> Парк усадьбы Строгановых</i><br><b>Год открытия: 1920</b><br><img src="https://yandex.ru/favicon.ico" width=280px>'),
+        ])
+
+        L.polygon([
+            [55.7633243, 37.6607627],
+            [55.7634179, 37.6611248],
+            [55.7636246, 37.6609558],
+            [55.7635341, 37.6605883],
+        ],{
+            fillColor: 'yellow'
         })
-        .bindPopup('<b>Название:</b><i> Парк усадьбы Строгановых</i><br><b>Год открытия: 1920</b><br><img src="https://yandex.ru/favicon.ico" width=280px>')
-        .addTo(myMap)
+
+        var baseLayers = {
+            'OSM карта': osmLayer,
+            'Туристическая карта OSM': osmOutdoor,
+            'Гугл спутник': googleSat,
+            'Яндекс спутник': yandexSat1,
+            'Яндекс схема': yandexMap,
+        },
+            overlayLayers = {
+                'Яндекс_пробки': yandexTraffic,
+                'Яндекс пробки с элементом управления':yandexTrafficControl,
+                'Объекты ООПТ': ooptWMSLayer,
+                'Парки Москвы': parksLayer
+            };
+        // layer switching
+        L.control.layers(baseLayers, overlayLayers).addTo(myMap);
+
     </script>
 </body>
 
