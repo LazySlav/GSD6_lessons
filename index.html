@@ -30,6 +30,7 @@
 
     <div id="map"></div>
     <script type="text/javascript" src="./data/shapes/railwayStations.js"></script>
+    <script type="text/javascript" src="./data/shapes/buildings.js"></script>
     <script type="text/javascript">
         function traffic() {
             var trafficProvider = new ymaps.traffic.provider.Actual({}, {
@@ -173,9 +174,23 @@
                 })
             }
         }).bindPopup(function(rws){
-            return '<b>Название вокзала: </b><i>' + rws.feature.properties.name + '</i>'
+            let rwsPhoto = '';
+            if (rws.feature.properties.photo_link != null) {
+                rwsPhoto = '<img src = "./data/images/' + rws.feature.properties.photo_link+ '.jpg" width = 280px>'
+            }
+            return '<b>Название вокзала: </b><i>' + rws.feature.properties.name + '</i><br>' + rwsPhoto
         })
         .addTo(myMap);
+
+        L.geoJSON(blds, {
+            style: function(feature){
+                feature.properties.material == 'кирпич' ? colorFill = 'red' : colorFill = 'grey';
+                return {
+                    color: colorFill
+                }
+            }
+        })
+        .addTo(myMap)
 
         var baseLayers = {
             'OSM карта': osmLayer,

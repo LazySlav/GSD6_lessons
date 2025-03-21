@@ -1,0 +1,10 @@
+var blds = {
+"type": "FeatureCollection",
+"name": "buildings",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"xy_coordinate_resolution": 1e-06,
+"features": [
+{ "type": "Feature", "properties": { "id": 1, "address": "105064, г. Москва, Гороховский пер., д. 4, к. 3", "material": "кирпич" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 37.661279, 55.763989 ], [ 37.661627, 55.763986 ], [ 37.661628, 55.763849 ], [ 37.661279, 55.763853 ], [ 37.661279, 55.763989 ] ] ] ] } },
+{ "type": "Feature", "properties": { "id": 2, "address": "105064, г. Москва, Гороховский пер., д. 4, с. 4", "material": "железобетон" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 37.660765, 55.763351 ], [ 37.66064, 55.763565 ], [ 37.660963, 55.763661 ], [ 37.661108, 55.763463 ], [ 37.660765, 55.763351 ] ] ] ] } }
+]
+}
