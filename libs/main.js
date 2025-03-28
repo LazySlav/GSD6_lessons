@@ -173,3 +173,25 @@ var baseLayers = {
     };
 // layer switching
 L.control.layers(baseLayers, overlayLayers).addTo(myMap);
+
+L.control.scale({
+    imperial: false,
+    maxWidth: 200,
+    position: 'bottomleft'
+}).addTo(myMap);
+
+myMap.attributionControl.setPrefix('&copy; <a href="https://github.com/LazySlav">by LazySlav</a>');
+
+var msrCtrl = new L.Control.Measure({
+    localization: 'ru',
+    primaryLengthUnit: 'kilometers',
+    secondaryLengthUnit: 'meters',
+    primaryAreaUnit: 'hectares',
+    secondaryAreaUnit: 'sqmeters',
+    thousandsSep: ' ',
+    decPoint: ',',
+    activeColor: '#4f16e2',
+    completedColor: '#bfaded'
+
+});
+msrCtrl.addTo(myMap);
