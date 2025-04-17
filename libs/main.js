@@ -195,3 +195,38 @@ var msrCtrl = new L.Control.Measure({
 
 });
 msrCtrl.addTo(myMap);
+
+//  Создание своего элемента интерфейса Легенда для определённого слоя
+var legendControl = L.control({
+	position: 'bottomright'
+});
+
+	// Наполнение элемента интерфейса Легенда
+legendControl.onAdd = function (myMap) {
+	let legendDiv = L.DomUtil.create('div', 'legendMap'),
+		labels = [];
+	L.DomEvent
+		.disableScrollPropagation(legendDiv)
+		.disableClickPropagation(legendDiv);
+	labels.push('<center><b>Легенда для ж/д вокзалов</b></center>');
+	labels.push('<img src="./data/icons/park_1.png" height="14"> - Вокзалы XXI века');
+	labels.push('<img src="./data/icons/park_3.png" height="14"> - Вокзалы XX века');
+	labels.push('<img src="./data/icons/park_5.png" height="14"> - Вокзалы XIX века');
+	legendDiv.innerHTML = labels.join('<br>');
+	return legendDiv
+};
+
+	// Добавление legendControl на карту
+// legendControl.addTo(myMap);
+
+	// Реализация возможности отображения/скрытия элеиента интерфейса "Легенда" при выборе слоя rwsPoints
+function legendAdd(){
+	legendControl.addTo(myMap)
+};
+
+function legendRemove(){
+	legendControl.remove(myMap)
+};
+
+rwsPoints.on('add', legendAdd);
+rwsPoints.on('remove', legendRemove);
