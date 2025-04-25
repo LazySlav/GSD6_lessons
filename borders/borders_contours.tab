@@ -1,0 +1,13 @@
+!table
+!version 300
+!charset Neutral
+
+Definition Table
+  Type NATIVE Charset "Neutral"
+  Fields 6
+    id Char (254) ;
+    name Char (254) ;
+    area Float ;
+    editable Integer ;
+    visible Integer ;
+    color Char (254) ;

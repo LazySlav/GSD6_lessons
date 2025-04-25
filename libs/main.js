@@ -230,3 +230,52 @@ function legendRemove(){
 
 rwsPoints.on('add', legendAdd);
 rwsPoints.on('remove', legendRemove);
+
+var region = L.latLngBounds([
+    [55.751656, 37.692032],
+    [55.775414, 37.641907],
+]);
+// L.rectangle(region).addTo(myMap);
+
+var layerBasmanny = L.videoOverlay("./output.mp4",region,{
+    autoplay: true,
+    loop: true,
+
+}).addTo(myMap);
+
+myMap.fitBounds(region);
+
+function playBasmanny(){
+    layerBasmanny.getElement().play()
+};  
+
+function pauseBasmanny(){
+    layerBasmanny.getElement().pause()
+};
+
+function playButton(){
+    let btn = L.DomUtil.create('button')
+    btn.innerHTML = '<b>Play<\b>'
+    L.DomEvent.on(btn, 'click', playBasmanny)
+    return btn
+};
+
+function pauseButton(){
+    let btn = L.DomUtil.create('button')
+    btn.innerHTML = '<b>Pause<\b>'
+    L.DomEvent.on(btn, 'click', pauseBasmanny)
+    return btn
+};
+
+function loadButtons(){
+    let playCtrl = L.Control.extend({
+        onAdd: playButton
+    }),
+        pauseCtrl = L.Control.extend({
+        onAdd: pauseButton
+    });
+    (new playCtrl()).addTo(myMap);
+    (new pauseCtrl()).addTo(myMap);
+};
+
+layerBasmanny.on('load',loadButtons);
