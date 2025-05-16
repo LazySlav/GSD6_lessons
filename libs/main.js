@@ -279,3 +279,23 @@ function loadButtons(){
 };
 
 layerBasmanny.on('load',loadButtons);
+
+var routingCtrl = L.Routing.control({
+    waypoints:[
+        L.latLng(55.7630618, 37.6615807),
+        L.latLng(55.7622574, 37.6436663)
+    ],
+    language: 'ru',
+    geocoder: L.Control.Geocoder.nominatim(),
+    router: L.Routing.mapbox('pk.eyJ1IjoibWFseXNoIiwiYSI6ImNqaTh6bW14djBybW0zcXBia2sxcDF5cWsifQ.Dc0hXPv2Vsf-upW7xxQ-_w', {
+        language: 'ru',
+    }),
+    showAlternatives: true,
+    reverseWaypoints: true,
+    altLineOptions: {
+        styles: [
+            {color: '#38761d', opacity: 0.75, weight: 5}
+        ]
+    }
+})
+routingCtrl.addTo(myMap)
